@@ -8,3 +8,28 @@ def dpMakeChange(coinValueList, change, minCoins):
     return minCoins[change]
 
 print(dpMakeChange([1, 5, 10, 21, 25], 63, [0] * 64))
+
+
+
+
+
+def dpMakeChange(coinValueList, change, minCoins):
+    # Loop through each amount of change from 1 to the given 'change'
+    for cents in range(1, change + 1):
+        coinCount = cents  # Initialize the coinCount with the current amount of change
+
+        # Iterate through coin values that are less than or equal to the current amount of change
+        for j in [c for c in coinValueList if c <= cents]:
+            # Check if using the current coin results in a smaller count than the current minimum count
+            if minCoins[cents - j] + 1 < coinCount:
+                coinCount = minCoins[cents - j] + 1
+
+        # Update the 'minCoins' list with the minimum number of coins needed for the current amount of change
+        minCoins[cents] = coinCount
+
+    # Return the minimum number of coins needed to make the specified amount of change
+    return minCoins[change]
+
+# Example usage:
+result = dpMakeChange([1, 5, 10, 21, 25], 63, [0] * 64)
+print(result)
