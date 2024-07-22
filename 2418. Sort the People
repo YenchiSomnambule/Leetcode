@@ -1,0 +1,89 @@
+https://leetcode.com/problems/sort-the-people/description/?envType=daily-question&envId=2024-07-22
+
+You are given an array of strings names, and an array heights that consists of distinct positive integers. Both arrays are of length n.
+
+For each index i, names[i] and heights[i] denote the name and height of the ith person.
+
+Return names sorted in descending order by the people's heights.
+
+ 
+
+Example 1:
+
+Input: names = ["Mary","John","Emma"], heights = [180,165,170]
+Output: ["Mary","Emma","John"]
+Explanation: Mary is the tallest, followed by Emma and John.
+Example 2:
+
+Input: names = ["Alice","Bob","Bob"], heights = [155,185,150]
+Output: ["Bob","Alice","Bob"]
+Explanation: The first Bob is the tallest, followed by Alice and the second Bob.
+ 
+
+Constraints:
+
+n == names.length == heights.length
+1 <= n <= 103
+1 <= names[i].length <= 20
+1 <= heights[i] <= 105
+names[i] consists of lower and upper case English letters.
+All the values of heights are distinct.
+
+
+
+A
+
+class Solution(object):
+    def sortPeople(self, names, heights):
+        # Zip heights and names to tuples where each tuple is (height[i], names[i])
+        # Then sort based on the heights, and with reverse (descending)
+        sorted_heights = sorted(zip(heights, names), reverse=True)
+        # Append the names in the sorted order (2nd element of each tuple)
+        res = [n for h, n in sorted_heights]
+        return res
+
+
+
+B
+
+
+def sortPeople(names, heights):
+    # Step 1: Combine names and heights into a list of tuples
+    people = list(zip(names, heights))
+    
+    # Step 2: Sort the list of tuples by the height in descending order
+    people.sort(key=lambda x: x[1], reverse=True)
+    
+    # Step 3: Extract the names from the sorted list of tuples
+    sorted_names = [person[0] for person in people]
+    
+    return sorted_names
+
+# Example usage
+names1 = ["Mary", "John", "Emma"]
+heights1 = [180, 165, 170]
+print(sortPeople(names1, heights1))  # Output: ["Mary", "Emma", "John"]
+
+names2 = ["Alice", "Bob", "Bob"]
+heights2 = [155, 185, 150]
+print(sortPeople(names2, heights2))  # Output: ["Bob", "Alice", "Bob"]
+
+
+
+B-1
+
+
+class Solution(object):
+    def sortPeople(self, names, heights):
+        # Step 1: Combine names and heights into a list of tuples
+        people = list(zip(names, heights))
+        
+        # Step 2: Sort the list of tuples by the height in descending order
+        people.sort(key=lambda x: x[1], reverse=True)
+        
+        # Step 3: Extract the names from the sorted list of tuples
+        sorted_names = [person[0] for person in people]
+        
+        return sorted_names
+
+        
